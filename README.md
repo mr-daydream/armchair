@@ -7,6 +7,10 @@
 - [Joshua Skillman](https://www.linkedin.com/pub/joshua-skillman-pe/101/706/417)
 - [The Delrey School](http://www.delreyschool.org/)
 
+### Shoutouts
+
+- [Felipe Albertao](https://github.com/felipealbertao)
+
 # Dependencies
 - [NodeJS](https://github.com/nodejs/node), a JavaScript runtime built on Chrome's V8 JavaScript engine.
 - [MyoJS](https://github.com/logotype/MyoJS.git), Thalmic Labs Myo JavaScript Framework.
