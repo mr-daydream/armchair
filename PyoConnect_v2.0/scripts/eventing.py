@@ -54,6 +54,7 @@ def onPoseEdge(pose, edge):
     print('Global onPoseEdge: ', pose, edge)
     data = json.dumps({'pose': pose, 'edge': edge})
     h.request('POST', '/pose', data, headers)
+    r = h.getresponse()
     # app.onPoseEdge(pose, edge)
 
 # if __name__ == '__main__':
