@@ -50,7 +50,7 @@ h = urllib2.httplib.HTTPConnection('localhost:8080')
 print('2')
 headers = {'Content-type': 'application/json'}
 print('3')
-myo.setLockingPolicy('none')
+#myo.setLockingPolicy('none')
 print('4')
 def onPoseEdge(pose, edge):
     print('Global onPoseEdge: ', pose, edge)
