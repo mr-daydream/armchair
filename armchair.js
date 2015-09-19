@@ -2,15 +2,15 @@
 // var io = require('socket.io')(app);
 // var five = require("johnny-five");
 // var board = new five.Board();
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-app.listen(8080);
+// var express = require('express');
+// var app = express();
+// var http = require('http').Server(app);
+// app.listen(8080);
 
-app.post('/pose', function(req, res) {
-    console.log('req', req.body);
-    // console.log('res', res);
-});
+// app.post('/pose', function(req, res) {
+//     console.log('req', req.body);
+//     // console.log('res', res);
+// });
 
 // var WebSocketClient = require('websocket').client;
 
@@ -56,3 +56,18 @@ app.post('/pose', function(req, res) {
 //   // Blink every half second
 //   led.blink(500); 
 // });
+var fs = require("fs");
+var message = { pose: null };
+var newMessage;
+setInterval(function() {
+    fs.readFile('./PyoConnect_v2.0/scripts/armchair.txt', 'utf8', function(err, data) {
+        if (err) {
+          console.log('Error: ', error);
+        }
+        console.log('Data: ', data);
+        // newMessage = JSON.parse(data);
+        // if (newMessage.pose !== message.pose) {
+        //   message = newMessage;
+        // }
+    })
+}, 15)
