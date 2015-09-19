@@ -1,4 +1,3 @@
-// var app = require('http').createServer(handler)
 // var five = require("johnny-five");
 // var board = new five.Board();
 
