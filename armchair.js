@@ -57,12 +57,14 @@
 //   led.blink(500); 
 // });
 var fs = require("fs");
-var message = { pose: null };
+var message = {
+    pose: null
+};
 var newMessage;
 setInterval(function() {
     fs.readFile('./PyoConnect_v2.0/scripts/armchair.txt', 'utf8', function(err, data) {
         if (err) {
-          console.log('Error: ', error);
+            console.log('Error: ', err);
         }
         console.log('Data: ', data);
         // newMessage = JSON.parse(data);
