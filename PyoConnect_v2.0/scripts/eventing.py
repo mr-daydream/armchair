@@ -8,6 +8,7 @@ test = "I am here as a placeholder for the SocketHandler instance reference"
 class SocketHandler(websocket.WebSocketHandler):
     def initialize(self, ref_object):
         test = self
+        print("test2 ", test)
         self.ref_object = ref_object
 
     # Why do all of these methods need to pass in self
@@ -35,15 +36,17 @@ class ApplicationServer():
 
     def start(self):
         self.application.listen(8888)
+        print("test", test)
 
     def onPoseEdge(self, pose, edge):
         print('ApplicationServer onPoseEdge called.')
         # Access the SocketHandler reference some how
-        # self.onPose(pose, edge)
+        if !isinstance(test, basestring)
+            self.onPose(pose, edge)
 
-def onPoseEdge(app, pose, edge):
+def onPoseEdge(pose, edge):
     # Tell the app instance to fire a websocket message
-    print("test: ", test)
+    print("Global onPoseEdge: ", test, pose, edge)
     app.onPoseEdge(pose, edge)
 
 if __name__ == '__main__':
@@ -51,10 +54,10 @@ if __name__ == '__main__':
     app = ApplicationServer()
     app.start()
 
+    # Definitely blocking.
+    ioloop.IOLoop.instance().start()
+
     # t = Timer(3.0, onPoseEdge(app, "test1", "test2"))
     # t.start()
-
-    # Is this blocking Timer?
-    ioloop.IOLoop.instance().start()
 
     
