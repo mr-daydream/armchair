@@ -28,17 +28,9 @@ client.on('connect', function(connection) {
             console.log('Message received: ', message);
         }
     });
-
-    function sendNumber() {
-        if (connection.connected) {
-            var number = Math.round(Math.random() * 0xFFFFFF);
-            connection.sendUTF(number.toString());
-        }
-    }
-    sendNumber();
 });
 
-client.connect('ws://localhost:8888/ws', null, 'http://localhost:8888');
+client.connect('ws://localhost:8080/', null, 'http://localhost:8080');
 
 // board.on("ready", function() {
 //   // Create an Led on pin 13
