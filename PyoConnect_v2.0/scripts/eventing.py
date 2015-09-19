@@ -50,6 +50,8 @@ h = urllib2.httplib.HTTPConnection('localhost:8080')
 
 headers = {'Content-type': 'application/json'}
 
+myo.setLockingPolicy('none')
+
 def onPoseEdge(pose, edge):
     print('Global onPoseEdge: ', pose, edge)
     data = json.dumps({'pose': pose, 'edge': edge})
