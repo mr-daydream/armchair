@@ -2,44 +2,53 @@
 // var io = require('socket.io')(app);
 // var five = require("johnny-five");
 // var board = new five.Board();
+var express = require('express');
+var app = express();
+var http = require('http').Server(app);
+app.listen(8080);
 
-var WebSocketClient = require('websocket').client;
-
-var client = new WebSocketClient();
-
-client.on('connectFailed', function(error) {
-    console.log('Connect Error: ' + error.toString());
+app.post('/pose', function(req, res) {
+    console.log('req', req);
+    console.log('res', res);
 });
 
-client.on('connect', function(connection) {
-    console.log('WebSocket Client Connected');
+// var WebSocketClient = require('websocket').client;
 
-    connection.on('error', function(error) {
-        console.log("Connection Error: " + error.toString());
-    });
+// var client = new WebSocketClient();
 
-    connection.on('close', function() {
-        console.log('Connection Closed');
-    });
+// client.on('connectFailed', function(error) {
+//     console.log('Connect Error: ' + error.toString());
+// });
 
-    connection.on('message', function(message) {
-        if (message.type === 'utf8') {
-            console.log("Received: '" + message.utf8Data + "'");
-        } else {
-            console.log('Message received: ', message);
-        }
-    });
+// client.on('connect', function(connection) {
+//     console.log('WebSocket Client Connected');
 
-    function sendNumber() {
-        if (connection.connected) {
-            var number = Math.round(Math.random() * 0xFFFFFF);
-            connection.sendUTF(number.toString());
-        }
-    }
-    sendNumber();
-});
+//     connection.on('error', function(error) {
+//         console.log("Connection Error: " + error.toString());
+//     });
 
-client.connect('ws://localhost:8888/ws', null, 'http://localhost:8888');
+//     connection.on('close', function() {
+//         console.log('Connection Closed');
+//     });
+
+//     connection.on('message', function(message) {
+//         if (message.type === 'utf8') {
+//             console.log("Received: '" + message.utf8Data + "'");
+//         } else {
+//             console.log('Message received: ', message);
+//         }
+//     });
+
+//     function sendNumber() {
+//         if (connection.connected) {
+//             var number = Math.round(Math.random() * 0xFFFFFF);
+//             connection.sendUTF(number.toString());
+//         }
+//     }
+//     sendNumber();
+// });
+
+// client.connect('ws://localhost:8888/ws', null, 'http://localhost:8888');
 
 // board.on("ready", function() {
 //   // Create an Led on pin 13
