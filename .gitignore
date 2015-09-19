@@ -1,5 +1,4 @@
 PyoConnect_v2.0/scripts/.DS_Store
-PyoConnect_v2.0/scripts/__init__.pyc
-PyoConnect_v2.0/myo_raw.pyc
-PyoConnect_v2.0/common.pyc
+PyoConnect_v2.0/scripts/*.pyc
+PyoConnect_v2.0/*.pyc
 node_modules
