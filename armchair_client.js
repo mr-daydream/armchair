@@ -2,6 +2,24 @@
 // var five = require("johnny-five");
 // var board = new five.Board();
 
+var poseMap = {
+    '0': {
+        pose: 'POSE_REST'
+    }, //POSE_REST
+    '1': {
+        pose: 'POSE_FIST'
+    }, //POSE_FIST
+    '2': {
+        pose: 'POSE_WAVE_IN'
+    }, //POSE_WAVE_IN
+    '3': {
+        pose: 'POSE_WAVE_OUT'
+    }, //POSE_WAVE_OUT
+    '4': {
+        pose: 'POSE_FINGERS_SPREAD'
+    } //POSE_FINGERS_SPREAD
+};
+
 var WebSocketClient = require('websocket').client;
 
 var client = new WebSocketClient();
@@ -30,7 +48,7 @@ client.on('connect', function(connection) {
     });
 });
 
-client.connect('ws://localhost:8080/', null, 'http://localhost:8080');
+client.connect('ws://localhost:8080/', 'echo-protocol', 'http://localhost:8080');
 
 // board.on("ready", function() {
 //   // Create an Led on pin 13
