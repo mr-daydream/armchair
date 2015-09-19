@@ -8,8 +8,8 @@ var http = require('http').Server(app);
 app.listen(8080);
 
 app.post('/pose', function(req, res) {
-    console.log('req', req);
-    console.log('res', res);
+    console.log('req', req.body);
+    // console.log('res', res);
 });
 
 // var WebSocketClient = require('websocket').client;
