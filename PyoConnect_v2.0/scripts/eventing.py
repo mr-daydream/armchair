@@ -1,22 +1,35 @@
 
-import tornado.ioloop
-import tornado.web
+from tornado import websocket, web, ioloop
 import json
-
-class MainHandler(tornado.web.RequestHandler):
-  def get(self):
-    self.write("Hello, world")
-  
-  def sendPose(pose, edge)
-    self.write(json.dumps({ pose: pose, edge: edge}))
+from threading import Timer
 
 def onPoseEdge(pose, edge):
-  MainHandler.sendPose(pose, edge)
+    print('Global onPoseEdge called.')
+    MainHandler.sendPose(pose, edge)
 
-application = tornado.web.Application([
-    url(r"/", MainHandler),
+class SocketHandler(websocket.WebSocketHandler):
+    def check_origin(self, origin):
+        return True
+
+    def open(self):
+        print('Socket opened.')
+
+    def on_close(self):
+        print('Socket closed.')
+
+    def on_message(self, message):
+        self.write_message(u"You said: " + message)
+
+    def sendPose(self, pose, edge):
+        print('sendPose called')
+        self.write(json.dumps({ pose: pose, edge: edge }))
+
+app = web.Application([
+    (r'/ws', SocketHandler)
 ])
 
-if __name__ == "__main__":
-    application.listen(8888)
-    tornado.ioloop.IOLoop.current().start()
+if __name__ == '__main__':
+    app.listen(8888)
+    ioloop.IOLoop.instance().start()
+    t = Timer(3.0, onPoseEdge(MainHandler, "pose", "edge"))
+    t.start()

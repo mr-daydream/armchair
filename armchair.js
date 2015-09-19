@@ -1,20 +1,46 @@
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
+// var app = require('http').createServer(handler)
+// var io = require('socket.io')(app);
 // var five = require("johnny-five");
 // var board = new five.Board();
 
-app.listen(80);
+var WebSocketClient = require('websocket').client;
 
-function handler(req, res) {
-    console.log('Request Handler: ', req, res);
-}
+var client = new WebSocketClient();
 
-io.on('connection', function(socket) {
-    console.log('IO On Connection.');
-    socket.on('my other event', function(data) {
-        console.log(data);
-    });
+client.on('connectFailed', function(error) {
+    console.log('Connect Error: ' + error.toString());
 });
+
+client.on('connect', function(connection) {
+    console.log('WebSocket Client Connected');
+
+    connection.on('error', function(error) {
+        console.log("Connection Error: " + error.toString());
+    });
+
+    connection.on('close', function() {
+        console.log('Connection Closed');
+    });
+
+    connection.on('message', function(message) {
+        if (message.type === 'utf8') {
+            console.log("Received: '" + message.utf8Data + "'");
+        } else {
+            console.log('Message received: ', message);
+        }
+    });
+
+    function sendNumber() {
+        if (connection.connected) {
+            var number = Math.round(Math.random() * 0xFFFFFF);
+            connection.sendUTF(number.toString());
+            setTimeout(sendNumber, 1000);
+        }
+    }
+    sendNumber();
+});
+
+client.connect('ws://localhost:8888/ws', null, 'http://localhost:8888');
 
 // board.on("ready", function() {
 //   // Create an Led on pin 13
