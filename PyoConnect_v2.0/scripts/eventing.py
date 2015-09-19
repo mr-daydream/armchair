@@ -45,13 +45,13 @@ import urllib2
 #         # Access the SocketHandler reference some how
 #         if !isinstance(test, basestring)
 #             self.onPose(pose, edge)
-
+print('1')
 h = urllib2.httplib.HTTPConnection('localhost:8080')
-
+print('2')
 headers = {'Content-type': 'application/json'}
-
+print('3')
 myo.setLockingPolicy('none')
-
+print('4')
 def onPoseEdge(pose, edge):
     print('Global onPoseEdge: ', pose, edge)
     data = json.dumps({'pose': pose, 'edge': edge})
