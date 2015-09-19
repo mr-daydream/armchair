@@ -1,22 +1,53 @@
-// var five = require("johnny-five");
-// var board = new five.Board();
+var five = require("johnny-five");
+var board = new five.Board();
+var pivotServo, forwardServo, isReady = false;
 
-var poseMap = {
-    '0': {
-        pose: 'POSE_REST'
-    }, //POSE_REST
-    '1': {
-        pose: 'POSE_FIST'
-    }, //POSE_FIST
-    '2': {
-        pose: 'POSE_WAVE_IN'
-    }, //POSE_WAVE_IN
-    '3': {
-        pose: 'POSE_WAVE_OUT'
-    }, //POSE_WAVE_OUT
-    '4': {
-        pose: 'POSE_FINGERS_SPREAD'
-    } //POSE_FINGERS_SPREAD
+var moveLeft = function() {
+    if (forwardServo.isMoving) {
+        stop(forwardServo);
+    }
+    // Move pivotServo left
+};
+
+var moveRight = function() {
+    if (forwardServo.isMoving) {
+        stop(forwardServo);
+    }
+    // Move pivotServo left
+};
+
+
+var moveForward = function() {
+    if (pivotServo.isMoving) {
+        stop(pivotServo);
+    }
+    // Move forwardServo forward
+};
+
+var moveBackward = function() {
+    if (pivotServo.isMoving) {
+        stop(pivotServo);
+    }
+    // Move forwardServo backward
+};
+
+var stop = function(servo) {
+    if (servo) {
+        servo.stop();
+    } else {
+        forwardServo.stop();
+        pivotServo.stop();
+    }
+    setTimeout(function() {}, 500);
+};
+
+
+var strikeAPose = {
+    '0': stop, //POSE_REST
+    '1': moveForward, //POSE_FIST
+    '2': moveLeft, //POSE_WAVE_IN
+    '3': moveRight, //POSE_WAVE_OUT
+    '4': moveBackward //POSE_FINGERS_SPREAD
 };
 
 var WebSocketClient = require('websocket').client;
@@ -39,19 +70,29 @@ client.on('connect', function(connection) {
     });
 
     connection.on('message', function(message) {
-        if (message.type === 'utf8') {
+        if (isReady && message.type === 'utf8') {
             console.log("Received: '" + message.utf8Data + "'");
+            strikeAPose[message.utf8Data]();
         } else {
-            console.log('Message received: ', message);
+            console.log('Non UTF8 Message received: ', message);
         }
     });
 });
 
-client.connect('ws://localhost:8080/', 'echo-protocol', 'http://localhost:8080');
+board.on("ready", function() {
+    pivotServo = new five.Servo() {
+        pin: 10,
+        range: [0, 180],
+        startAt: 90
+    };
 
-// board.on("ready", function() {
-//   // Create an Led on pin 13
-//   var led = new five.Led(13);
-//   // Blink every half second
-//   led.blink(500); 
-// });
+    forwardServo = new five.Servo() {
+        pin: 11,
+        range: [0, 180],
+        startAt: 90
+    }
+
+    isReady = true;
+});
+
+client.connect('ws://localhost:8080/', 'echo-protocol', 'http://localhost:8080');
