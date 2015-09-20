@@ -55,9 +55,7 @@ var moveForward = function() {
             forwardServo.jz_direction = 'forward';
             pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
             pivotServo.jz_direction === 'stop';
-            setTimeout(function() {
-                stop();
-            }, 300);
+            stop();
             timer = false;
         } else {
             clearInterval(moveForwardInterval);
@@ -72,17 +70,15 @@ var moveBackward = function() {
     console.log('Move Right');
     stop();
     var timer = true;
-    var moveForwardInterval = setInterval(function() {
+    var moveBackwardInterval = setInterval(function() {
         if (timer) {
             forwardServo.jz_direction = 'back';
             pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
             pivotServo.jz_direction === 'stop';
-            setTimeout(function() {
-                stop();
-            }, 300);
+            stop();
             timer = false;
         } else {
-            clearInterval(moveForwardInterval);
+            clearInterval(moveBackwardInterval);
         }
     }, 500);
     setTimeout(function() {
