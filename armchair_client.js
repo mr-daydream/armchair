@@ -3,29 +3,29 @@ var board = new five.Board();
 var pivotServo, forwardServo, isReady = false;
 
 var moveLeft = function() {
-    if (forwardServo.isMoving) {
+    if (forwardServo && forwardServo.isMoving) {
         stop(forwardServo);
     }
-    pivotServo.ccw();
+    pivotServo.min();
 };
 
 var moveRight = function() {
-    if (forwardServo.isMoving) {
+    if (forwardServo && forwardServo.isMoving) {
         stop(forwardServo);
     }
-    pivotServo.cw();
+    pivotServo.max();
 };
 
 
 var moveForward = function() {
-    if (pivotServo.isMoving) {
+    if (pivotServo && pivotServo.isMoving) {
         stop(pivotServo);
     }
     forwardServo.min()
 };
 
 var moveBackward = function() {
-    if (pivotServo.isMoving) {
+    if (pivotServo && pivotServo.isMoving) {
         stop(pivotServo);
     }
     forwardServo.max();
@@ -35,8 +35,10 @@ var stop = function(servo) {
     if (servo) {
         servo.stop();
     } else {
-        forwardServo.stop();
-        pivotServo.stop();
+if (forwardServo) {
+        forwardServo.stop();}
+if (pivotServo) {
+        pivotServo.stop();}
     }
     setTimeout(function() {}, 500);
 };
@@ -70,7 +72,7 @@ client.on('connect', function(connection) {
     });
 
     connection.on('message', function(message) {
-        if (isReady && message.type === 'utf8' && message.utf8Data) {
+        if (isReady && message.type === 'utf8' && strikeAPose[message.utf8Data]) {
             console.log("Received: '" + message.utf8Data + "'");
             strikeAPose[message.utf8Data]();
         } else {
