@@ -67,20 +67,14 @@ var moveBackward = function() {
 var stop = function() {
     console.log('Stop');
     if (forwardServo) {
-        //forwardServo.stop();
-        console.log('forwardServo pin: ', forwardServo.pin);
-        forwardServo.pin(1);
+        forwardServo.stop();
         forwardServo = null;
-        console.log('forwardServo pin again: ', forwardServo.pin);
         forwardServo = new five.Servo.Continuous(11).stop();
     }
 
     if (pivotServo) {
-        // pivotServo.stop();
-        console.log('pivotServo pin: ', pivotServo.pin);
-        pivotServo.pin(1);
+        pivotServo.stop();
         pivotServo = null;
-        console.log('pivotServo pin again: ', pivotServo.pin);
         pivotServo = new five.Servo.Continuous(10).stop();
     }
 };
