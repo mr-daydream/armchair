@@ -6,6 +6,7 @@ var pivotServo, forwardServo, isReady = false;
 var moveLeft = function() {
     console.log('Move Left');
     stop();
+    var timer = true;
     var moveLeftInterval = setInterval(function() {
         if (timer) {
             pivotServo.jz_direction = 'left';
