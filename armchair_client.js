@@ -5,53 +5,82 @@ var pivotServo, forwardServo, isReady = false;
 
 var moveLeft = function() {
     console.log('Move Left');
-    // if (forwardServo && forwardServo.isMoving) {
-    //     stop(forwardServo);
-    // }
     stop();
-    pivotServo.min();
+    var moveLeftInterval = setInterval(function() {
+        if (timer) {
+            pivotServo.jz_direction = 'left';
+            pivotServo.ccw(0.4);
+            timer = false;
+        } else {
+            clearInterval(moveLeftInterval);
+        }
+    }, 200);
+    setTimeout(function() {
+        pivotServo.jz_direction = 'left';
+        pivotServo.cw(0.5);
+    }, 500);
 };
 
 var moveRight = function() {
     console.log('Move Right');
-    // if (forwardServo && forwardServo.isMoving) {
-    //     stop(forwardServo);
-    // }
     stop();
-    pivotServo.max();
+    var timer = true;
+    var moveRightInterval = setInterval(function() {
+        if (timer) {
+            pivotServo.jz_direction = 'right';
+            pivotServo.cw(0.4);
+            timer = false;
+        } else {
+            clearInterval(moveRightInterval);
+        }
+    }, 200);
+    setTimeout(function() {
+        pivotServo.jz_direction = 'right';
+        pivotServo.ccw(0.5);
+    }, 500);
 };
 
 
 var moveForward = function() {
     console.log('Move Right');
-    // if (pivotServo && pivotServo.isMoving) {
-    //     stop(pivotServo);
-    // }
     stop();
-    forwardServo.min()
+    var timer = true;
+    var moveForwardInterval = setInterval(function() {
+        if (timer) {
+            forwardServo.jz_direction = 'forward';
+            forwardServo.cw(0.4);
+            timer = false;
+        } else {
+            clearInterval(moveForwardInterval);
+        }
+    }, 200);
+    setTimeout(function() {
+        forwardServo.ccw(0.5)
+    }, 500);
 };
 
 var moveBackward = function() {
     console.log('Stop from moveBackward');
-    // if (pivotServo && pivotServo.isMoving) {
-    //     stop(pivotServo);
-    // }
     stop();
-    forwardServo.max();
 };
 
 var stop = function() {
     console.log('Stop');
     if (forwardServo) {
         //forwardServo.stop();
+        console.log('forwardServo pin: ', forwardServo.pin);
+        forwardServo.pin(1);
+        console.log('forwardServo pin again: ', forwardServo.pin);
         forwardServo = new five.Servo.Continuous(11).stop();
     }
 
     if (pivotServo) {
         // pivotServo.stop();
+        console.log('pivotServo pin: ', pivotServo.pin);
+        pivotServo.pin(1);
+        console.log('pivotServo pin again: ', pivotServo.pin);
         pivotServo = new five.Servo.Continuous(10).stop();
     }
-    setTimeout(function() {}, 1000);
 };
 
 
@@ -89,7 +118,8 @@ client.on('connect', function(connection) {
     connection.on('message', function(message) {
         if (isReady && message.type === 'utf8' && strikeAPose[message.utf8Data]) {
             console.log("Received: '" + message.utf8Data + "'");
-            pose(message.utf8Data);
+            if (message.utf8Data)
+                pose(message.utf8Data);
         } else {
             console.log('Non UTF8 Message received: ', message);
         }
@@ -99,14 +129,12 @@ client.on('connect', function(connection) {
 board.on("ready", function() {
     pivotServo = new five.Servo({
         pin: 10,
-        range: [0, 180],
-        startAt: 90
+        type: 'continuous'
     });
 
     forwardServo = new five.Servo({
         pin: 11,
-        range: [0, 180],
-        startAt: 90
+        type: 'continuous'
     });
 
     isReady = true;
