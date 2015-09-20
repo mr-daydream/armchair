@@ -47,7 +47,7 @@ var moveRight = function() {
 
 
 var moveForward = function() {
-    console.log('Move Right');
+    console.log('Move Forward');
     stop();
     var timer = true;
     var moveForwardInterval = setInterval(function() {
@@ -60,14 +60,14 @@ var moveForward = function() {
         } else {
             clearInterval(moveForwardInterval);
         }
-    }, 500);
+    }, 400);
     setTimeout(function() {
         forwardServo.ccw(0.5)
     }, 700);
 };
 
 var moveBackward = function() {
-    console.log('Move Right');
+    console.log('Move Back');
     stop();
     var timer = true;
     var moveBackwardInterval = setInterval(function() {
@@ -80,7 +80,7 @@ var moveBackward = function() {
         } else {
             clearInterval(moveBackwardInterval);
         }
-    }, 500);
+    }, 400);
     setTimeout(function() {
         forwardServo.cw(0.5)
     }, 700);
