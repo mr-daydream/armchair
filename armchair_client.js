@@ -70,7 +70,7 @@ client.on('connect', function(connection) {
     });
 
     connection.on('message', function(message) {
-        if (isReady && message.type === 'utf8') {
+        if (isReady && message.type === 'utf8' && message.utf8Data) {
             console.log("Received: '" + message.utf8Data + "'");
             strikeAPose[message.utf8Data]();
         } else {
@@ -95,4 +95,4 @@ board.on("ready", function() {
     isReady = true;
 });
 
-client.connect('ws://localhost:8080/', 'echo-protocol', 'http://localhost:8080');
+client.connect('ws://192.168.1.157:8080/', 'echo-protocol', 'http://192.168.1.157:8080');
