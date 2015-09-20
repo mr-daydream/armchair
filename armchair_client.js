@@ -10,7 +10,7 @@ var moveLeft = function() {
     var moveLeftInterval = setInterval(function() {
         if (timer) {
             pivotServo.jz_direction = 'left';
-            pivotServo.ccw(0.4);
+            pivotServo.ccw(1);
             timer = false;
         } else {
             clearInterval(moveLeftInterval);
@@ -29,7 +29,7 @@ var moveRight = function() {
     var moveRightInterval = setInterval(function() {
         if (timer) {
             pivotServo.jz_direction = 'right';
-            pivotServo.cw(0.4);
+            pivotServo.cw(1);
             timer = false;
         } else {
             clearInterval(moveRightInterval);
@@ -49,7 +49,7 @@ var moveForward = function() {
     var moveForwardInterval = setInterval(function() {
         if (timer) {
             forwardServo.jz_direction = 'forward';
-            forwardServo.cw(0.4);
+            forwardServo.cw(1);
             timer = false;
         } else {
             clearInterval(moveForwardInterval);
