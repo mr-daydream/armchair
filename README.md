@@ -39,5 +39,9 @@
 
 - `node armchair_client.js`
 
+## Utility Scripts
+Panic button script to stop servos immediately.
+- `node stopservos.js`
+
 ## Flow Diagram
 ![Flow Diagram](https://raw.githubusercontent.com/mr-daydream/armchair/master/flow_diagram.png "Flow Diagram")
