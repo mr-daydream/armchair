@@ -76,23 +76,19 @@ var moveBackward = function() {
 var stop = function() {
     console.log('Stop');
     if (forwardServo) {
-        forwardServo.jz_direction === 'forward' ? forwardServo.cw(0.9) : forwardServo.ccw(0.9);
-        forwardServo.jz_direction = 'stop';
         setTimeout(function() {
             forwardServo.stop();
             forwardServo = null;
             forwardServo = new five.Servo.Continuous(11).stop();
-        }, 300);
+        }, 200);
     }
 
     if (pivotServo) {
-        pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
-        pivotServo.jz_direction = 'stop';
         setTimeout(function() {
             pivotServo.stop();
             pivotServo = null;
             pivotServo = new five.Servo.Continuous(10).stop();
-        }, 300);
+        }, 200);
     }
 };
 
