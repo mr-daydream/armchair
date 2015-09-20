@@ -57,12 +57,12 @@ var moveForward = function() {
             pivotServo.jz_direction === 'stop';
             setTimeout(function() {
                 stop();
-            }, 200);
+            }, 300);
             timer = false;
         } else {
             clearInterval(moveForwardInterval);
         }
-    }, 400);
+    }, 500);
     setTimeout(function() {
         forwardServo.ccw(0.5)
     }, 700);
@@ -76,19 +76,15 @@ var moveBackward = function() {
 var stop = function() {
     console.log('Stop');
     if (forwardServo) {
-        setTimeout(function() {
-            forwardServo.stop();
-            forwardServo = null;
-            forwardServo = new five.Servo.Continuous(11).stop();
-        }, 200);
+        forwardServo.stop();
+        forwardServo = null;
+        forwardServo = new five.Servo.Continuous(11).stop();
     }
 
     if (pivotServo) {
-        setTimeout(function() {
-            pivotServo.stop();
-            pivotServo = null;
-            pivotServo = new five.Servo.Continuous(10).stop();
-        }, 200);
+        pivotServo.stop();
+        pivotServo = null;
+        pivotServo = new five.Servo.Continuous(10).stop();
     }
 };
 
