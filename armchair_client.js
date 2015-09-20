@@ -69,8 +69,25 @@ var moveForward = function() {
 };
 
 var moveBackward = function() {
-    console.log('Stop from moveBackward');
+    console.log('Move Right');
     stop();
+    var timer = true;
+    var moveForwardInterval = setInterval(function() {
+        if (timer) {
+            forwardServo.jz_direction = 'back';
+            pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
+            pivotServo.jz_direction === 'stop';
+            setTimeout(function() {
+                stop();
+            }, 300);
+            timer = false;
+        } else {
+            clearInterval(moveForwardInterval);
+        }
+    }, 500);
+    setTimeout(function() {
+        forwardServo.cw(0.5)
+    }, 700);
 };
 
 var stop = function() {
@@ -90,7 +107,7 @@ var stop = function() {
 
 
 var strikeAPose = {
-    '0': stop, //POSE_REST
+    '0': function() {}, //POSE_REST
     '1': moveForward, //POSE_FIST
     '2': moveLeft, //POSE_WAVE_IN
     '3': moveRight, //POSE_WAVE_OUT
