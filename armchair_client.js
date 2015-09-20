@@ -15,11 +15,11 @@ var moveLeft = function() {
         } else {
             clearInterval(moveLeftInterval);
         }
-    }, 200);
+    }, 400);
     setTimeout(function() {
         pivotServo.jz_direction = 'left';
         pivotServo.cw(0.5);
-    }, 500);
+    }, 700);
 };
 
 var moveRight = function() {
@@ -34,11 +34,11 @@ var moveRight = function() {
         } else {
             clearInterval(moveRightInterval);
         }
-    }, 200);
+    }, 400);
     setTimeout(function() {
         pivotServo.jz_direction = 'right';
         pivotServo.ccw(0.5);
-    }, 500);
+    }, 700);
 };
 
 
@@ -54,10 +54,10 @@ var moveForward = function() {
         } else {
             clearInterval(moveForwardInterval);
         }
-    }, 200);
+    }, 400);
     setTimeout(function() {
         forwardServo.ccw(0.5)
-    }, 500);
+    }, 700);
 };
 
 var moveBackward = function() {
