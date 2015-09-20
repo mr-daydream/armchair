@@ -13,6 +13,7 @@
 
 # Dependencies
 - [NodeJS](https://github.com/nodejs/node), a JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [Lodash](https://github.com/lodash/lodash), A JavaScript utility library delivering consistency, modularity, performance, & extras.
 - [MyoJS](https://github.com/logotype/MyoJS.git), Thalmic Labs Myo JavaScript Framework.
 - [WebSocket-Node](https://github.com/theturtle32/WebSocket-Node), A WebSocket Implementation for NodeJS.
 - [Q](https://github.com/kriskowal/q), A tool for creating and composing asynchronous promises in JavaScript.
