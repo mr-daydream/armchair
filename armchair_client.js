@@ -1,44 +1,51 @@
 var five = require("johnny-five");
 var board = new five.Board();
+var _ = require('lodash');
 var pivotServo, forwardServo, isReady = false;
 
 var moveLeft = function() {
-    if (forwardServo && forwardServo.isMoving) {
-        stop(forwardServo);
-    }
+    console.log('Move Left');
+    // if (forwardServo && forwardServo.isMoving) {
+    //     stop(forwardServo);
+    // }
+    stop();
     pivotServo.min();
 };
 
 var moveRight = function() {
-    if (forwardServo && forwardServo.isMoving) {
-        stop(forwardServo);
-    }
+    console.log('Move Right');
+    // if (forwardServo && forwardServo.isMoving) {
+    //     stop(forwardServo);
+    // }
+    stop();
     pivotServo.max();
 };
 
 
 var moveForward = function() {
-    if (pivotServo && pivotServo.isMoving) {
-        stop(pivotServo);
-    }
+    console.log('Move Right');
+    // if (pivotServo && pivotServo.isMoving) {
+    //     stop(pivotServo);
+    // }
+    stop();
     forwardServo.min()
 };
 
 var moveBackward = function() {
-    if (pivotServo && pivotServo.isMoving) {
-        stop(pivotServo);
-    }
+    console.log('Stop');
+    // if (pivotServo && pivotServo.isMoving) {
+    //     stop(pivotServo);
+    // }
+    stop();
     forwardServo.max();
 };
 
-var stop = function(servo) {
-    if (servo) {
-        servo.stop();
-    } else {
-if (forwardServo) {
-        forwardServo.stop();}
-if (pivotServo) {
-        pivotServo.stop();}
+var stop = function() {
+    if (forwardServo) {
+        forwardServo.stop();
+    }
+    if (pivotServo) {
+        pivotServo.stop();
     }
     setTimeout(function() {}, 500);
 };
@@ -49,8 +56,12 @@ var strikeAPose = {
     '1': moveForward, //POSE_FIST
     '2': moveLeft, //POSE_WAVE_IN
     '3': moveRight, //POSE_WAVE_OUT
-    '4': moveBackward //POSE_FINGERS_SPREAD
+    '4': stop //POSE_FINGERS_SPREAD
 };
+
+var pose = _.debounce(function(p) {
+    strikeAPose[p]();
+}, 1000);
 
 var WebSocketClient = require('websocket').client;
 
@@ -74,7 +85,7 @@ client.on('connect', function(connection) {
     connection.on('message', function(message) {
         if (isReady && message.type === 'utf8' && strikeAPose[message.utf8Data]) {
             console.log("Received: '" + message.utf8Data + "'");
-            strikeAPose[message.utf8Data]();
+            pose(message.utf8Data);
         } else {
             console.log('Non UTF8 Message received: ', message);
         }
@@ -82,13 +93,13 @@ client.on('connect', function(connection) {
 });
 
 board.on("ready", function() {
-    pivotServo = new five.Servo( {
+    pivotServo = new five.Servo({
         pin: 10,
         range: [0, 180],
         startAt: 90
     });
 
-    forwardServo = new five.Servo( {
+    forwardServo = new five.Servo({
         pin: 11,
         range: [0, 180],
         startAt: 90
