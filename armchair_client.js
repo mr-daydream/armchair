@@ -69,21 +69,21 @@ var moveForward = function() {
 var moveBackward = function() {
     console.log('Move Back');
     stop();
-    // var timer = true;
-    // var moveBackwardInterval = setInterval(function() {
-    //     if (timer) {
-    //         forwardServo.jz_direction = 'back';
-    //         pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
-    //         pivotServo.jz_direction === 'stop';
-    //         stop();
-    //         timer = false;
-    //     } else {
-    //         clearInterval(moveBackwardInterval);
-    //     }
-    // }, 200);
+    var timer = true;
+    var moveBackwardInterval = setInterval(function() {
+        if (timer) {
+            forwardServo.jz_direction = 'back';
+            pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
+            pivotServo.jz_direction === 'stop';
+            stop();
+            timer = false;
+        } else {
+            clearInterval(moveBackwardInterval);
+        }
+    }, 400);
     setTimeout(function() {
         forwardServo.cw(0.6)
-    }, 300);
+    }, 700);
 };
 
 var stop = function() {
@@ -107,7 +107,7 @@ var strikeAPose = {
     '1': moveForward, //POSE_FIST
     '2': moveLeft, //POSE_WAVE_IN
     '3': moveRight, //POSE_WAVE_OUT
-    '4': stop //POSE_FINGERS_SPREAD
+    '4': moveBackward //POSE_FINGERS_SPREAD
 };
 
 var pose = _.debounce(function(p) {
