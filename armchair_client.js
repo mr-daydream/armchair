@@ -80,10 +80,10 @@ var moveBackward = function() {
         } else {
             clearInterval(moveBackwardInterval);
         }
-    }, 400);
+    }, 200);
     setTimeout(function() {
         forwardServo.cw(0.5)
-    }, 700);
+    }, 500);
 };
 
 var stop = function() {
