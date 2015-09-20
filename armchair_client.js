@@ -21,14 +21,14 @@ var moveForward = function() {
     if (pivotServo.isMoving) {
         stop(pivotServo);
     }
-    forwardServo.cw()
+    forwardServo.min()
 };
 
 var moveBackward = function() {
     if (pivotServo.isMoving) {
         stop(pivotServo);
     }
-    forwardServo.ccw();
+    forwardServo.max();
 };
 
 var stop = function(servo) {
@@ -80,17 +80,17 @@ client.on('connect', function(connection) {
 });
 
 board.on("ready", function() {
-    pivotServo = new five.Servo() {
+    pivotServo = new five.Servo( {
         pin: 10,
         range: [0, 180],
         startAt: 90
-    };
+    });
 
-    forwardServo = new five.Servo() {
+    forwardServo = new five.Servo( {
         pin: 11,
         range: [0, 180],
         startAt: 90
-    }
+    });
 
     isReady = true;
 });
