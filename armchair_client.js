@@ -10,7 +10,9 @@ var moveLeft = function() {
     var moveLeftInterval = setInterval(function() {
         if (timer) {
             pivotServo.jz_direction = 'left';
-            pivotServo.ccw(1);
+            forwardServo.jz_direction === 'forward' ? forwardServo.cw(0.9) : forwardServo.ccw(0.9);
+            forwardServo.jz_direction = 'stop';
+            stop();
             timer = false;
         } else {
             clearInterval(moveLeftInterval);
@@ -29,7 +31,9 @@ var moveRight = function() {
     var moveRightInterval = setInterval(function() {
         if (timer) {
             pivotServo.jz_direction = 'right';
-            pivotServo.cw(1);
+            forwardServo.jz_direction === 'forward' ? forwardServo.cw(0.9) : forwardServo.ccw(0.9);
+            forwardServo.jz_direction = 'stop';
+            stop();
             timer = false;
         } else {
             clearInterval(moveRightInterval);
@@ -49,7 +53,9 @@ var moveForward = function() {
     var moveForwardInterval = setInterval(function() {
         if (timer) {
             forwardServo.jz_direction = 'forward';
-            forwardServo.cw(1);
+            pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
+            pivotServo.jz_direction === 'stop';
+            stop();
             timer = false;
         } else {
             clearInterval(moveForwardInterval);
