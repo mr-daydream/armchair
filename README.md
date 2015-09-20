@@ -43,5 +43,7 @@
 Panic button script to stop servos immediately.
 - `node stopservos.js`
 
+# Diagrams
+
 ## Flow Diagram
 ![Flow Diagram](https://raw.githubusercontent.com/mr-daydream/armchair/master/flow_diagram.png "Flow Diagram")
