@@ -55,7 +55,9 @@ var moveForward = function() {
             forwardServo.jz_direction = 'forward';
             pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
             pivotServo.jz_direction === 'stop';
-            stop();
+            setTimeout(function() {
+                stop();
+            }, 300);
             timer = false;
         } else {
             clearInterval(moveForwardInterval);
