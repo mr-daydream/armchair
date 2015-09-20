@@ -32,7 +32,7 @@ var moveForward = function() {
 };
 
 var moveBackward = function() {
-    console.log('Stop');
+    console.log('Stop from moveBackward');
     // if (pivotServo && pivotServo.isMoving) {
     //     stop(pivotServo);
     // }
@@ -41,6 +41,9 @@ var moveBackward = function() {
 };
 
 var stop = function() {
+    console.log('Stop');
+    console.log('forwardServo: ', forwardServo);
+    console.log('pivotServo: ', pivotServo);
     if (forwardServo) {
         forwardServo.stop();
     }
