@@ -69,21 +69,21 @@ var moveForward = function() {
 var moveBackward = function() {
     console.log('Move Back');
     stop();
-    var timer = true;
-    var moveBackwardInterval = setInterval(function() {
-        if (timer) {
-            forwardServo.jz_direction = 'back';
-            pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
-            pivotServo.jz_direction === 'stop';
-            stop();
-            timer = false;
-        } else {
-            clearInterval(moveBackwardInterval);
-        }
-    }, 200);
+    // var timer = true;
+    // var moveBackwardInterval = setInterval(function() {
+    //     if (timer) {
+    //         forwardServo.jz_direction = 'back';
+    //         pivotServo.jz_direction === 'right' ? pivotServo.cw(0.9) : pivotServo.ccw(0.9);
+    //         pivotServo.jz_direction === 'stop';
+    //         stop();
+    //         timer = false;
+    //     } else {
+    //         clearInterval(moveBackwardInterval);
+    //     }
+    // }, 200);
     setTimeout(function() {
-        forwardServo.cw(0.5)
-    }, 500);
+        forwardServo.cw(0.6)
+    }, 300);
 };
 
 var stop = function() {
