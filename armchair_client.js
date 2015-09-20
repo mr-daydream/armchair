@@ -42,15 +42,16 @@ var moveBackward = function() {
 
 var stop = function() {
     console.log('Stop');
-    console.log('forwardServo: ', forwardServo);
-    console.log('pivotServo: ', pivotServo);
     if (forwardServo) {
-        forwardServo.stop();
+        //forwardServo.stop();
+        forwardServo = new five.Servo.Continuous(11).stop();
     }
+
     if (pivotServo) {
-        pivotServo.stop();
+        // pivotServo.stop();
+        pivotServo = new five.Servo.Continuous(10).stop();
     }
-    setTimeout(function() {}, 500);
+    setTimeout(function() {}, 1000);
 };
 
 
