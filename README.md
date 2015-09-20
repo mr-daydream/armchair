@@ -38,3 +38,6 @@
 ## Raspberry Pi Client
 
 - `node armchair_client.js`
+
+## Flow Diagram
+![Flow Diagram](https://raw.githubusercontent.com/mr-daydream/armchair/master/flow_diagram.png "Flow Diagram")
