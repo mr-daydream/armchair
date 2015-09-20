@@ -6,14 +6,14 @@ var moveLeft = function() {
     if (forwardServo.isMoving) {
         stop(forwardServo);
     }
-    // Move pivotServo left
+    pivotServo.ccw();
 };
 
 var moveRight = function() {
     if (forwardServo.isMoving) {
         stop(forwardServo);
     }
-    // Move pivotServo left
+    pivotServo.cw();
 };
 
 
@@ -21,14 +21,14 @@ var moveForward = function() {
     if (pivotServo.isMoving) {
         stop(pivotServo);
     }
-    // Move forwardServo forward
+    forwardServo.cw()
 };
 
 var moveBackward = function() {
     if (pivotServo.isMoving) {
         stop(pivotServo);
     }
-    // Move forwardServo backward
+    forwardServo.ccw();
 };
 
 var stop = function(servo) {
