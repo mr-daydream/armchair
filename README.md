@@ -54,4 +54,7 @@ Panic button script to stop servos immediately.
 # Diagrams
 
 ## Flow Diagram
-![Flow Diagram](https://raw.githubusercontent.com/mr-daydream/armchair/master/flow_diagram.png "Flow Diagram")
+![Flow Diagram](https://raw.githubusercontent.com/mr-daydream/armchair/master/images/flow_diagram.png "Flow Diagram")
+
+## Wiring Diagram
+![Wiring Diagram](https://raw.githubusercontent.com/mr-daydream/armchair/master/images/wiring_diagram.png "Wiring Diagram")
